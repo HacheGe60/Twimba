@@ -49,7 +49,17 @@ function handleReplyClick(replyId) {
 }
 
 function handleTweetBtnClick() {
-    console.log(tweetInput.value);
+    console.log({
+        handle: `@H.A.Gomez`,
+        profilePic: `images/scrimbalogo.png`,
+        likes: 0,
+        retweets: 0,
+        tweetText: `${tweetInput.value}`,
+        replies: [],
+        isLiked: false,
+        isRetweeted: false,
+        uuid: crypto.randomUUID(),
+    });
 }
 
 function getFeedHtml() {
