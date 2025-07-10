@@ -49,7 +49,7 @@ function handleReplyClick(replyId) {
 }
 
 function handleTweetBtnClick() {
-    console.log({
+    tweetsData.unshift({
         handle: `@H.A.Gomez`,
         profilePic: `images/scrimbalogo.png`,
         likes: 0,
@@ -58,19 +58,22 @@ function handleTweetBtnClick() {
         replies: [],
         isLiked: false,
         isRetweeted: false,
-        uuid: crypto.randomUUID(),
+        uuid: crypto.randomUUID()
     });
+    render();
+    tweetInput.value = "";
 }
 
 function getFeedHtml() {
     let feedHtml = "";
     tweetsData.forEach(function (tweet) {
         let likeIconClass = '';
-        let retweetIconClass = '';
 
         if (tweet.isLiked) {
             likeIconClass = 'liked';
         };
+
+        let retweetIconClass = '';
 
         if (tweet.isRetweeted) {
             retweetIconClass = 'retweeted';
@@ -81,16 +84,16 @@ function getFeedHtml() {
         if (tweet.replies.length > 0) {
             tweet.replies.forEach(function (reply) {
                 repliesHtml += `
-                <div class="tweet-reply">
-                    <div class="tweet-inner">
-                        <img src="${reply.profilePic}" class="profile-pic">
-                        <div>
-                        <p class="handle">${reply.handle}</p>
-                        <p class="tweet-text">${reply.tweetText}</p>
-                        </div>
+                    <div class="tweet-reply">
+                        <div class="tweet-inner">
+                            <img src="${reply.profilePic}" class="profile-pic">
+                                <div>
+                                    <p class="handle">${reply.handle}</p>
+                                    <p class="tweet-text">${reply.tweetText}</p>
+                                </div>
+                            </div>
                     </div>
-                </div>
-                `;
+                    `;
             });
         };
 
@@ -124,7 +127,7 @@ function getFeedHtml() {
                     </div>            
                 </div>
             </div>
-            <div id="replies-${tweet.uuid}">                
+            <div class="hidden" id="replies-${tweet.uuid}">                
                 ${repliesHtml}
             </div>
         `;
