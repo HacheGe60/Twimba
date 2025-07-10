@@ -1,6 +1,5 @@
 import { tweetsData } from "./data.js";
 
-const tweetInput = document.querySelector("#tweet-input");
 
 document.addEventListener('click', function (e) {
     if (e.target.dataset.like) {
@@ -48,19 +47,24 @@ function handleReplyClick(replyId) {
     document.querySelector(`#replies-${replyId}`).classList.toggle("hidden");
 }
 
+
 function handleTweetBtnClick() {
-    tweetsData.unshift({
-        handle: `@H.A.Gomez`,
-        profilePic: `images/scrimbalogo.png`,
-        likes: 0,
-        retweets: 0,
-        tweetText: `${tweetInput.value}`,
-        replies: [],
-        isLiked: false,
-        isRetweeted: false,
-        uuid: crypto.randomUUID()
-    });
-    render();
+    const tweetInput = document.querySelector("#tweet-input");
+
+    if (tweetInput.value.trim()) {
+        tweetsData.unshift({
+            handle: `@H.A.Gomez`,
+            profilePic: `images/scrimbalogo.png`,
+            likes: 0,
+            retweets: 0,
+            tweetText: `${tweetInput.value}`,
+            replies: [],
+            isLiked: false,
+            isRetweeted: false,
+            uuid: crypto.randomUUID()
+        });
+        render();
+    }
     tweetInput.value = "";
 }
 
